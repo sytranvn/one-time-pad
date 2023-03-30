@@ -1,0 +1,19 @@
+import { encrypt, decrypt } from './index.mjs'
+import { readFile, writeFile } from 'node:fs/promises'
+import PNG from 'png-js'
+
+const fileBuffer = await readFile('./broken.png')
+const file = new PNG(fileBuffer)
+
+const [key, cypher] = encrypt(file.imgData)
+console.log(`Key is: ${key}`)
+const data = decrypt(cypher, key)
+
+for (let i = 0; i < cypher.length; i++) {
+  fileBuffer[file.imgDataOffset + i] = cypher[i]
+}
+await writeFile('./hidden.png', fileBuffer)
+for (let i = 0; i < cypher.length; i++) {
+  fileBuffer[file.imgDataOffset + i] = data[i]
+}
+await writeFile('./recover.png', fileBuffer)
