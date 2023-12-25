@@ -4,7 +4,7 @@
   "description": "One time pad encryption",
   "main": "index.js",
   "scripts": {
-    "start": "node test.mjs",
+    "start": "http-server sample",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "sytranvn",
@@ -12,5 +12,8 @@
   "type": "module",
   "dependencies": {
     "png-js": "^1.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }
